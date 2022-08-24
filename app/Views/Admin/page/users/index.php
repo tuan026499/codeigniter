@@ -68,7 +68,7 @@
                             <?php } ?>
                         </tbody>
                     </table>
-                    <?= $pager->links('list','pager')?>
+                   
                 </div>
             </div>
         </div>
