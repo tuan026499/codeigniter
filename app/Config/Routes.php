@@ -41,6 +41,7 @@ $routes->get('/', 'Home::index');
         $routes->get('login','Admin\LoginController::index');
         $routes->post('check','Admin\LoginController::check');
         $routes->get('register','Admin\LoginController::register');
+        $routes->get('search','Admin\SearchController::search');
         $routes->post('post-register','Admin\LoginController::save_register');
             $routes->group('',['filter'=>'AuthCheck'],function($routes){
             $routes->get('dashboard','Admin\homecontroller::index');

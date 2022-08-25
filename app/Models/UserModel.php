@@ -41,10 +41,5 @@ class UserModel extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    public function search($keyword) {
-        $builder = $this->table('users');
-        $builder->like('full_name',$keyword);
-        return $builder;
-    }
 }
 

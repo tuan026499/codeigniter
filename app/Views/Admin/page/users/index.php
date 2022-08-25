@@ -32,10 +32,9 @@
                     }
                     ?>
                     <table class="w-100 table table-bordered">
-                        <form method="get" action="">
-                        <?= csrf_field() ?>
-                            <input type="text" name="search" class="input-search" placeholder="Search here...">
-                            <button type="submit">search</button>
+                        <form method="get" action="admin/search" id="searchForm">
+                            <input type='text' name='search' value='<?php $search; ?>' placeholder="Search here...">
+                            <input type='button' id='btnsearch' value='Submit' onclick='document.getElementById("searchForm").submit();'>
                         </form>
                         <thead>
                             <tr>
@@ -68,7 +67,19 @@
                             <?php } ?>
                         </tbody>
                     </table>
-                   
+                    <!-- Pagination -->
+                    <div class="pagination justify-content-center mb-4">
+                        <?php if (!empty($pager)) :
+                            //echo $pager->simpleLinks('group1', 'bs_simple');
+                            echo $pager->links('group1', 'bs_full');
+                        endif ?>
+
+                        <!-- Bootstrap 4.5.2 code to show page 1 of 4 total pages using a button. -->
+                        <div class="btn-group pagination justify-content-center mb-4" role="group" aria-label="pager counts">
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-light"><?= 'Page ' . $currentPage . ' of ' . $totalPages; ?></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

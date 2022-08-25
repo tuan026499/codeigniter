@@ -4,6 +4,8 @@ namespace App\Controllers\Admin;
 use App\Models\UserModel;
 use App\Controllers\BaseController;
 use App\Libraries\Hash;
+use CodeIgniter\Config\Services;
+
 class UserController extends BaseController
 {
     public function __construct(){
@@ -13,12 +15,18 @@ class UserController extends BaseController
     
     public function index()
     {
+        $pager = Services::pager();
         $model = new UserModel();
         $loggedUser = session()->get('logged');
         if($loggedUser==true){
             $userInfo= $model->find($loggedUser);
             $data['userInfo']=$userInfo;
-            $data['users'] = $model->findAll();
+            $data=[
+                'users'=>$model->paginate(2,'group1'),
+                'pager'=>$model->pager,
+                'currentPage' => $model->pager->getCurrentPage('group1'), // The current page number
+                'totalPages'  => $model->pager->getPageCount('group1'),
+            ];
             return view('Admin/page/users/index',$data);
         }
        return redirect()->to('admin/login');
